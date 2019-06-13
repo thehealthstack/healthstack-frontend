@@ -14,7 +14,7 @@
     </div>
     <div class="level-right">
       <div class="navbar-menu">
-        <div class="navbar-end">
+        <div v-if="!isAuthenticated" class="navbar-end">
           <div class="navbar-item">
             <div class="field is-grouped">
               <div class="control">
@@ -29,6 +29,23 @@
             </div>
           </div>
         </div>
+        <div v-else class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+            <div class="navbar-link">Toto Pasteur</div>
+            <div class="navbar-dropdown">
+              <a class="navbar-item">
+                <span class="icon is-small">
+                  <i class="fas fa-user"></i>
+                </span>  Profile
+              </a>
+              <a class="navbar-item">
+                <span class="icon is-small">
+                  <i class="fas fa-sign-out-alt"></i>
+                </span>  Sign Out
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
@@ -36,7 +53,8 @@
 
 <script>
 export default {
-  name: "NavBarComponent"
+  name: 'NavBarComponent',
+  props: ['isAuthenticated'],
 };
 </script>
 
