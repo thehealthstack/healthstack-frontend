@@ -1,6 +1,6 @@
 <template>
   <div class="welcome">
-    <NavBarComponent/>
+    <NavBarComponent :isAuthenticated="isAuthenticated" />
     <SignupComponent/>
     <ServicesComponent/>
     <FooterComponent/>
@@ -15,6 +15,11 @@ import FooterComponent from '@/components/FooterComponent.vue';
 
 export default {
   name: 'Welcome',
+  data() {
+    return {
+      isAuthenticated: false,
+    };
+  },
   components: {
     NavBarComponent,
     SignupComponent,
