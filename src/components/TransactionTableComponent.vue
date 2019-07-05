@@ -19,10 +19,10 @@
           <input type="checkbox">
         </td>
         <td>
-          <code>+237690346872</code>
+          <code>{{ transaction.medicalresult.patient.email }}</code>
         </td>
         <td>
-          <code>vladimirfomene@gmail.com</code>
+          <code>{{ transaction.medicalresult.patient.telephone }}</code>
         </td>
         <td>
           <span class="icon">
@@ -52,7 +52,8 @@
 
 <script>
 export default {
-  name: "TransactionTableComponent"
+  name: 'TransactionTableComponent',
+  props: ['transaction'],
 };
 </script>
 
