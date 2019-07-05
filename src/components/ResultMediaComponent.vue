@@ -6,19 +6,19 @@
           <span class="icon">
             <i class="fas fa-phone-alt"></i>
           </span>
-          {{ result.telephone }}
+          {{ result.patient.user.telephone }}
         </li>
         <li>
           <span class="icon">
             <i class="fas fa-envelope-square"></i>
           </span>
-          {{ result.email }}
+          {{ result.patient.user.email }}
         </li>
-        <li v-for="(file, index) in result.fileUrls" :key="index">
+        <li v-for="(file, index) in result.medicalresultfiles" :key="index">
           <span class="icon">
             <i class="far fa-file"></i>
           </span>
-          {{ file }}
+          {{ file.fileUrl }}
         </li>
       </ul>
     </div>
@@ -29,17 +29,15 @@
 <script>
 
 export default {
-  name: "ResultMediaComponent",
-  props: ["result"]
+  name: 'ResultMediaComponent',
+  props: ['result'],
 
-}
+};
 </script>
 
 <style lang="scss" scoped>
 
 </style>
-
-
 
 
 <style lang="scss" scoped>
