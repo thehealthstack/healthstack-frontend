@@ -28,8 +28,8 @@
 <script>
 
 export default {
-  name: "SideBarNavComponent",
-}
+  name: 'SideBarNavComponent',
+};
 
 </script>
 
