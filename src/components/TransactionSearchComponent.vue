@@ -23,11 +23,10 @@
 
 <script>
 export default {
-  name: "TransactionSearchComponent.vue"
+  name: 'TransactionSearchComponent.vue',
 };
 </script>
 
 <style lang="scss" scoped>
 
 </style>
-
