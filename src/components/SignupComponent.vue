@@ -12,26 +12,26 @@
       <form class="box">
         <div class="field is-grouped">
           <div class="control">
-            <input class="input" type="text" placeholder="First Name" required>
+            <input class="input" v-model="fields.firstName" type="text" placeholder="First Name" required>
           </div>
           <div class="control">
-            <input class="input" type="text" placeholder="Last Name" required>
-          </div>
-        </div>
-        <div class="field">
-          <div class="control">
-            <input class="input" type="email" placeholder="Email" required>
+            <input class="input" v-model="fields.lastName" type="text" placeholder="Last Name" required>
           </div>
         </div>
         <div class="field">
           <div class="control">
-            <input class="input" type="tel" placeholder="Phone Number with Country Code" required>
+            <input class="input" v-model="fields.email" type="email" placeholder="Email" required>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <input class="input" v-model="fields.telephone" type="tel" placeholder="Phone Number with Country Code" required>
           </div>
         </div>
         <div class="field">
           <div class="control">
             <div class="select is-fullwidth">
-              <select>
+              <select> <!-- add a way to capture the organization Id -->
                 <option>Centre Pasteur Cameroun</option>
                 <option>Prima Laboratory</option>
                 <option>Labo GT</option>
@@ -41,17 +41,17 @@
         </div>
         <div class="field">
           <div class="control">
-            <input class="input" type="password" placeholder="Password" required>
+            <input class="input" v-model="fields.password" type="password" placeholder="Password" required>
           </div>
         </div>
         <div class="field">
           <div class="control">
-            <input class="input" type="password" placeholder="Password Confirmation" required>
+            <input class="input" v-model="fields.confirmation" type="password" placeholder="Password Confirmation" required>
           </div>
         </div>
         <div class="field">
           <div class="control">
-            <button class="button is-link">Signup</button>
+            <button @click="signup" class="button is-link">Signup</button>
           </div>
         </div>
       </form>
@@ -63,6 +63,56 @@
 <script>
 export default {
   name: 'SignupComponent',
+  data() {
+    return {
+      fields: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        telephone: '',
+        organizationId: '05bf20b9-0281-4aef-8068-5f540f86cced',
+        password: '',
+        confirmation: '',
+      },
+      fieldErrors: {
+        firstName: undefined,
+        lastName: undefined,
+        email: undefined,
+        telephone: undefined,
+        organizationId: undefined,
+        password: undefined,
+      },
+    };
+  },
+  methods: {
+    signup(evt) {
+      evt.preventDefault();
+      this.fieldErrors = this.validateForm(this.fields);
+      if (Object.keys(this.fieldErrors).length) {
+        console.log(this.fieldErrors);
+        return; // you have to redirect user to error page for retry
+      }
+      console.log(this.fields);
+      this.$store.dispatch('signup', this.fields);
+    },
+    validateForm(fields) {
+      const errors = {};
+      if (!fields.firstName) errors.firstName = 'Firstname required';
+      if (!fields.lastName) errors.lastName = 'Lastname required';
+      if (!fields.email && !this.isEmail(fields.email)) errors.email = 'Email address Invalid';
+      if (!fields.telephone) errors.telephone = 'Telephone required';
+      if (!fields.organizationId) errors.organizationId = 'Organization required';
+      if (!fields.password) errors.password = 'Password required';
+      if (!fields.confirmation) errors.confirmation = 'Confirmation required';
+      if (fields.password !== fields.confirmation) errors.Password = 'Password and Confirmation do not match';
+
+      return errors;
+    },
+    isEmail(email) {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    },
+  },
 };
 </script>
 
