@@ -9,7 +9,7 @@
             <TransactionSearchComponent />
             <TransactionFilterComponent />
           </div>
-          <TransactionTableComponent />
+          <TransactionTableComponent v-for="(transaction, index) in transactions" :transaction="transaction" :key="index"/>
         </div>
       </div>
     </div>
@@ -17,20 +17,23 @@
 </template>
 
 
-
 <script>
-import TransactionSearchComponent from "@/components/TransactionSearchComponent.vue";
-import TransactionFilterComponent from "@/components/TransactionFilterComponent.vue";
-import TransactionTableComponent from "@/components/TransactionTableComponent.vue";
-import SideBarNavComponent from "@/components/SideBarNavComponent.vue";
-import NavBarComponent from "@/components/NavBarComponent.vue";
+import TransactionSearchComponent from '@/components/TransactionSearchComponent.vue';
+import TransactionFilterComponent from '@/components/TransactionFilterComponent.vue';
+import TransactionTableComponent from '@/components/TransactionTableComponent.vue';
+import SideBarNavComponent from '@/components/SideBarNavComponent.vue';
+import NavBarComponent from '@/components/NavBarComponent.vue';
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "Transaction",
+  name: 'Transaction',
   data() {
     return {
-      isAuthenticated: true
+      isAuthenticated: true,
     };
+  },
+  created(){
+    this.$store.dispatch('getTransactions');
   },
   components: {
     NavBarComponent,
@@ -38,6 +41,9 @@ export default {
     TransactionTableComponent,
     TransactionFilterComponent,
     TransactionSearchComponent,
+  },
+  computed: {
+    ...mapGetters(['transactions']),
   }
 };
 </script>
