@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: "TransactionFilterComponent"
+  name: 'TransactionFilterComponent',
 };
 </script>
 
