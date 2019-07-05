@@ -18,13 +18,18 @@
           <div class="navbar-item">
             <div class="field is-grouped">
               <div class="control">
-                <input class="input" type="email" placeholder="Email">
+                <input class="input" v-model="fields.email" type="email" placeholder="Email">
               </div>
               <div class="control">
-                <input class="input" type="password" placeholder="Password">
+                <input
+                  class="input"
+                  v-model="fields.password"
+                  type="password"
+                  placeholder="Password"
+                >
               </div>
               <div class="control">
-                <button class="button is-link">Login</button>
+                <button class="button is-link" @click="login">Login</button>
               </div>
             </div>
           </div>
@@ -36,12 +41,12 @@
               <a class="navbar-item">
                 <span class="icon is-small">
                   <i class="fas fa-user"></i>
-                </span>  Profile
+                </span> Profile
               </a>
               <a class="navbar-item">
                 <span class="icon is-small">
                   <i class="fas fa-sign-out-alt"></i>
-                </span>  Sign Out
+                </span> Sign Out
               </a>
             </div>
           </div>
@@ -55,6 +60,37 @@
 export default {
   name: 'NavBarComponent',
   props: ['isAuthenticated'],
+  data() {
+    return {
+      fields: {
+        email: '',
+        password: '',
+      },
+      fieldErrors: {
+        email: undefined,
+        password: undefined,
+      },
+    };
+  },
+  methods: {
+    validateForm(fields) {
+      const errors = {};
+
+      if (!fields.email && !this.isEmail(fields.email)) errors.email = 'Email address Invalid';
+      if (!fields.password) errors.password = 'Password required';
+
+      return errors;
+    },
+    isEmail(email) {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    },
+    login() {
+      this.fieldErrors = this.validateForm(this.fields);
+      if (Object.keys(this.fieldErrors).length) return;// send the user to another page with all these errors.
+      this.$store.dispatch('login', this.fields);
+    },
+  },
 };
 </script>
 
