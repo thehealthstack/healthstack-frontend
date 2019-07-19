@@ -1,3 +1,3 @@
 export default {
-  BASE_URL: 'http://localhost:3000/api',
+  BASE_URL: 'http://54.194.170.231/api',
 };
