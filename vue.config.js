@@ -4,7 +4,7 @@ module.exports = {
       registry: undefined,
       awsProfile: 'default',
       region: 'eu-west-1',
-      bucket: 'healthstack-frontend',
+      bucket: 'www.healthstack.app',
       createBucket: false,
       staticHosting: true,
       staticIndexPage: 'index.html',
