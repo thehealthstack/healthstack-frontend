@@ -13,14 +13,6 @@
         </label>
       </form>
     </div>
-    <div class="notification column is-info has-text">
-      <p class="title is-1">{{ numUploaded }}</p>
-      <p class="subtitle is-4">Succeeded</p>
-    </div>
-    <div class="notification column is-warning has-text">
-      <p class="title is-1">{{ numFailedUpload }}</p>
-      <p class="subtitle is-4">Failed</p>
-    </div>
     <button class="button is-success" @click="createTransactions">Deliver Results</button>
   </div>
 </template>
@@ -36,8 +28,6 @@ export default {
   data() {
     return {
       files: new FormData(),
-      numUploaded: 0,
-      numFailedUpload: 0
     };
   },
   methods: {
