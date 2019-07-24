@@ -28,8 +28,6 @@ export default {
   data() {
     return {
       files: new FormData(),
-      numUploaded: 0,
-      numFailedUpload: 0
     };
   },
   methods: {
