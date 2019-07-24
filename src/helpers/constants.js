@@ -1,3 +1,3 @@
 export default {
-  BASE_URL: 'http://54.194.170.231/api',
+  BASE_URL: 'ec2-54-246-183-178.eu-west-1.compute.amazonaws.com/api',
 };
