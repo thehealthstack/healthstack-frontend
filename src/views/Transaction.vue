@@ -1,6 +1,6 @@
 <template>
   <div class="transaction">
-    <NavBarComponent :isAuthenticated="isAuthenticated"/>
+    <NavBarComponent :isAuthenticated="isAuthenticated" />
     <div class="section">
       <div class="columns">
         <SideBarNavComponent />
@@ -9,7 +9,28 @@
             <TransactionSearchComponent />
             <TransactionFilterComponent />
           </div>
-          <TransactionTableComponent v-for="(transaction, index) in transactions" :transaction="transaction" :key="index"/>
+          <table class="table is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th class="is-narrow">
+                  <input type="checkbox" />
+                </th>
+                <th>Email</th>
+                <th>Telephone</th>
+                <th>Email Status</th>
+                <th>Sms Status</th>
+                <th>Results</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <TransactionRowComponent
+                v-for="(transaction, index) in transactions"
+                :transaction="transaction"
+                :key="index"
+              />
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -18,32 +39,32 @@
 
 
 <script>
-import TransactionSearchComponent from '@/components/TransactionSearchComponent.vue';
-import TransactionFilterComponent from '@/components/TransactionFilterComponent.vue';
-import TransactionTableComponent from '@/components/TransactionTableComponent.vue';
-import SideBarNavComponent from '@/components/SideBarNavComponent.vue';
-import NavBarComponent from '@/components/NavBarComponent.vue';
-import { mapGetters } from 'vuex';
+import TransactionSearchComponent from "@/components/TransactionSearchComponent.vue";
+import TransactionFilterComponent from "@/components/TransactionFilterComponent.vue";
+import TransactionRowComponent from "@/components/TransactionRowComponent.vue";
+import SideBarNavComponent from "@/components/SideBarNavComponent.vue";
+import NavBarComponent from "@/components/NavBarComponent.vue";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'Transaction',
+  name: "Transaction",
   data() {
     return {
-      isAuthenticated: true,
+      isAuthenticated: true
     };
   },
-  created(){
-    this.$store.dispatch('getTransactions');
+  created() {
+    this.$store.dispatch("getTransactions");
   },
   components: {
     NavBarComponent,
     SideBarNavComponent,
-    TransactionTableComponent,
+    TransactionRowComponent,
     TransactionFilterComponent,
-    TransactionSearchComponent,
+    TransactionSearchComponent
   },
   computed: {
-    ...mapGetters(['transactions']),
+    ...mapGetters(["transactions"])
   }
 };
 </script>
